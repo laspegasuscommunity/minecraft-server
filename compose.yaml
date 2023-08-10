@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  #Это конфигурация Docker Compose для игрового сервера Minecraft (Ванильный).
+  # Minecraft 1.20.1
+  minecraft-server:
+    container_name: minecraft-server
+    deploy:
+      resources:
+        limits:
+          memory: "4gb"
+    env_file: minecraft.env
+    image: itzg/minecraft-server:java17
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "false"
+    ports:
+      - "25565:25565"
+    volumes:
+      - "./minecraft/data:/data"
+
+networks:
+  default:
+    external: true
+    name: $NETWORK
