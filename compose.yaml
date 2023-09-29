@@ -6,6 +6,9 @@ services:
   minecraft-server:
     container_name: minecraft-server
     deploy:
+      restart_policy:
+        condition: always
+        delay: 5s
       resources:
         limits:
           memory: "4gb"
